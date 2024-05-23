@@ -33,24 +33,24 @@ const RSVPForm = ({
     const events = [];
     if (invitedTo.mainT) {
       events.push({
-        title: "Khushi ni Majlis & Jaman",
-        date: "Evening, August 17th, 2024",
-        location: "341 Dunhams Corner Rd, East Brunswick, NJ 08816",
+        title: "Rukhsati",
+        date: "Evening, August 10th, 2024",
+        location: "17730 Coventry Park Dr, Houston, TX 77084",
         members: mainMembers,
       });
     }
     if (invitedTo.shitaabiT) {
       events.push({
         title: "Shitaabi",
-        date: "August 16th, 2024",
-        location: "10 Wood Lake Ct, North Brunswick, NJ 08902",
+        date: "August 7th, 2024",
+        location: "17730 Coventry Park Dr, Houston, TX 77084",
         members: shitaabiMembers,
       });
     }
     if (invitedTo.waalimoT) {
       events.push({
-        title: "Walimo",
-        date: "August 11th, 2024",
+        title: "Mamu Mosallo",
+        date: "August 8th, 2024",
         location: "TBD, Houston, TX",
         members: waalimoMembers,
       });

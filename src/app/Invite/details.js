@@ -22,7 +22,7 @@ const Details = ({
   return (
     <div className="container">
       <div className="row mb-3">
-        <h2>We Cordially Invite You</h2>
+        <h2>Join Us For A Tale As Old As Time</h2>
       </div>
 
       <div className="row mb-3 d-flex justify-content-center text-center ">

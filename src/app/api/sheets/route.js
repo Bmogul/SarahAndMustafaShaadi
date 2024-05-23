@@ -15,6 +15,20 @@ import { getGoogleSheets, getAuthClient } from "../../lib/google-sheets";
     res.status(500).json({ error: "Failed to fetch data from Google Sheets" });
   }
 }*/
+const getCentralTimeDate = () => {
+  const centralTimeZone = 'America/Chicago'; // Central Time Zone
+  const now = new Date();
+  const offsetMs = now.getTimezoneOffset() * 60 * 1000;
+  const centralTimeMs = now.getTime() - offsetMs;
+  const centralTime = new Date(centralTimeMs);
+
+  // Get the year, month, and date components
+  const year = centralTime.getFullYear();
+  const month = String(centralTime.getMonth() + 1).padStart(2, '0');
+  const day = String(centralTime.getDate()).padStart(2, '0');
+
+  return `${month}/${day}/${year}`;
+};
 export async function POST(req) {
   try {
     console.log("posting");
@@ -37,30 +51,35 @@ export async function POST(req) {
     const allValues = response.data.values || [];
     const headerRow = allValues.shift();
     const guidColumnIndex = headerRow.indexOf("GUID");
-    const njScanIdColumnIndex = headerRow.indexOf("NJscan_id");
+    const njScanIdColumnIndex = headerRow.indexOf("UID");
+
+    console.log(guidColumnIndex)
+    console.log(njScanIdColumnIndex)
 
     const valuesToUpdate = {};
 
     for (const member of family) {
-      const { GUID, NJscan_id } = member;
+      const { GUID, UID } = member;
 
-      if (!GUID || !NJscan_id) {
-        continue; // Skip members without GUID or NJscan_id
+      if (!GUID || !UID) {
+        continue; // Skip members without GUID or UID
       }
 
       const matchingRows = allValues.filter((row) => {
         if (
-          row[guidColumnIndex] === GUID &&
-          row[njScanIdColumnIndex] === NJscan_id
+          row[guidColumnIndex].toString() === GUID &&
+          row[njScanIdColumnIndex].toString() === UID
         ) {
           const rowNumber = allValues.indexOf(row) + 2;
-          const cellRange = `playground!V${rowNumber}:Z${rowNumber}`;
+          const cellRange = `playground!L${rowNumber}:O${rowNumber}`;
           const values = [
             parseInt(member.MainResponse),
             parseInt(member.ShitabiResponse),
             parseInt(member.WalimoResponse),
-            Date.now()
+            getCentralTimeDate()
           ];
+
+          console.log(values)
 
           valuesToUpdate[cellRange] = {
             values: [values],
@@ -68,6 +87,7 @@ export async function POST(req) {
 
           return true;
         }
+        console.log("NOPE")
 
         return false;
       });
@@ -108,41 +128,54 @@ export async function GET(req) {
     if (!guid)
       return NextResponse.json({ message: "Missing guid" }, { status: 400 });
 
+    console.log(process.env.GOOGLE_SHEET_ID, '/n/n/n');
+
     const sheets = await getGoogleSheets();
+
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
       range: "playground",
     });
+
     const rawData = response.data.values;
     const parsed = {};
     const keys = rawData.shift();
+
     console.log("KEYS", keys, "KEYS");
 
     rawData.forEach((row) => {
       const hofId = row[0];
-
       if (!parsed[hofId]) {
         // If a family object with this HOFID doesn't exist, create a new one
         parsed[hofId] = [];
       }
 
       const parsedRow = row.reduce((acc, value, index) => {
-        acc[keys[index]] = value || null;
+        let key = keys[index];
+        if (key === 'MMInvite') {
+          key = 'WalimoInvite';
+        } else if (key === 'MMResponse') {
+          key = 'WalimoResponse';
+        }
+        acc[key] = value || null;
         return acc;
       }, {});
 
       parsed[hofId].push(parsedRow);
     });
+
     //console.log("PARSED DATA", parsed);
+
     const familyData = parsed[guid] || [];
-    console.log(familyData)
+
+    console.log(familyData);
 
     return NextResponse.json(familyData);
   } catch (err) {
     console.error(err);
     return NextResponse.json(
       { message: "Internal Server Error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

@@ -44,6 +44,7 @@ const Home = () => {
 
   useEffect(() => {
     if (!family) return;
+    console.log(family)
     const updatedMainT = Object.values(family).some(
       (fam) =>
         fam.MainInvite === "1" ||
@@ -58,7 +59,7 @@ const Home = () => {
     setShitaabiT(updatedShitaabiT);
 
     const updatedWaalimoT = Object.values(family).some(
-      (fam) => fam.WalimoInvite === "1" || parseInt(fam.WalimoInvite) > 1,
+      (fam) => fam.WalimoInvite=== "1" || parseInt(fam.WalimoInvite) > 1,
     );
     setWaalimoT(updatedWaalimoT);
 
@@ -67,6 +68,7 @@ const Home = () => {
       if (updatedWaalimoT) order.push(waalimo);
       if (updatedShitaabiT) order.push(shitaabi);
       if (updatedMainT) order.push(main);
+      console.log(order)
       return order;
     });
 
@@ -104,7 +106,7 @@ const Home = () => {
 
   const updateMember = (member) => {
     const updatedFam = family.map((mem) => {
-      if (mem.NJscan_id === member.NJscan_id) {
+      if (mem.UID === member.UID) {
         return member;
       }
       return mem;
@@ -146,7 +148,7 @@ const Home = () => {
         />
       )}
       <div className="row p-3 mt-3 mb-4">
-        <h1>Mogul Shaadi 1446</h1>
+        <h1>Motiwala Shaadi 1446</h1>
       </div>
       {!guid ? (
         <div className="row">
