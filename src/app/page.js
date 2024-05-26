@@ -32,7 +32,7 @@ const Home = () => {
   const gLoc = "Al Masjid Al Zainee Anjuman-e-Burhani (New Jersey)";
   const dLoc =
     "341 Dunhams Corner Rd, East Brunswick, NJ 08816 Saturday, August 17th, 2024";
-  const rsvpDate = "Saturday, June 15th, 2024";
+  const rsvpDate = "Saturday, July 6th, 2024";
 
   const [cardOrder, setCardOrder] = useState(() => {
     const order = [];
