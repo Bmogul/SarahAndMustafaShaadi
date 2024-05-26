@@ -3,11 +3,17 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Teachers:ital,wght@0,400..800;1,400..800&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Clicker+Script&display=swap');
+
 * {
 }
 
 body {
-  font-family: "Rogue Script", cursive;
+  font-family: "Marck Script", cursive;
+  font-weight: 400;
+  font-style: normal;
   background: #bdcccc;
 }
 
@@ -18,7 +24,9 @@ a {
 .landingpage {
   margin-bottom: 150px;
 
-  font-family: "Rogue Script", cursive;
+  font-family: "Clicker Script", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
 .formModal, .formModal * {
   font-family: "Teachers", sans-serif;
