@@ -1,7 +1,8 @@
 // Override default variables before the import
-$body-bg: #FCF2DA;
+$body-bg: #bdcccc;
+
 // Example customization
-$font-family-sans-serif: "Elsie Swash Caps", serif;
+$font-family-sans-serif: "Rogue Script", cursive;
 
 // Import Bootstrap and its default variables
 @import "~bootstrap/scss/bootstrap.scss";
