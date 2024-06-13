@@ -26,6 +26,8 @@ const Home = () => {
 
   const [headMember, setHeadMember] = useState(false);
 
+  const [currentCardIndex, setCurrentCardIndex] = useState(0);
+
   const searchParams = useSearchParams();
   const guid = searchParams.get("guid");
 
@@ -44,7 +46,7 @@ const Home = () => {
 
   useEffect(() => {
     if (!family) return;
-    console.log(family)
+    console.log(family);
     const updatedMainT = Object.values(family).some(
       (fam) =>
         fam.MainInvite === "1" ||
@@ -59,7 +61,7 @@ const Home = () => {
     setShitaabiT(updatedShitaabiT);
 
     const updatedWaalimoT = Object.values(family).some(
-      (fam) => fam.WalimoInvite=== "1" || parseInt(fam.WalimoInvite) > 1,
+      (fam) => fam.WalimoInvite === "1" || parseInt(fam.WalimoInvite) > 1,
     );
     setWaalimoT(updatedWaalimoT);
 
@@ -68,7 +70,7 @@ const Home = () => {
       if (updatedWaalimoT) order.push(waalimo);
       if (updatedShitaabiT) order.push(shitaabi);
       if (updatedMainT) order.push(main);
-      console.log(order)
+      console.log(order);
       return order;
     });
 
@@ -90,10 +92,25 @@ const Home = () => {
     fetchData(guid);
   }, [guid]);
 
+  const [activeCardIndex, setActiveCardIndex] = useState(0);
+
+  useEffect(() => {
+    // Reset the activeCardIndex when the cardOrder changes
+    setActiveCardIndex(0);
+  }, [cardOrder]);
+
   const handleCardClick = (clickedCard) => {
-    const newOrder = cardOrder.filter((card) => card !== clickedCard);
+    const newOrder = [...cardOrder];
+    const clickedCardIndex = newOrder.indexOf(clickedCard);
+
+    // Remove the clicked card from its current position
+    newOrder.splice(clickedCardIndex, 1);
+
+    // Add the clicked card to the end of the array
     newOrder.push(clickedCard);
+
     setCardOrder(newOrder);
+    setActiveCardIndex(newOrder.length - 1);
   };
 
   const openForm = () => {
@@ -176,8 +193,18 @@ const Home = () => {
                 </div>
               ))}
             </div>
+            <div className="card-navigation">
+              {cardOrder.map((_, index) => (
+                <span
+                  key={index}
+                  className={`nav-dot ${index === currentCardIndex ? "active" : ""}`}
+                  onClick={() => setActiveCardIndex(index)}
+                >
+                  a
+                </span>
+              ))}
+            </div>
           </div>
-
           <div className="col-12 col-md-1" />
           <div className="col-12 col-md-5 d-flex align-items-center order-md-2">
             <Details

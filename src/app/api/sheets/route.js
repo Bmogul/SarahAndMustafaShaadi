@@ -44,7 +44,7 @@ export async function POST(req) {
 
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
-      range: "playground",
+      range: "InviteeList",
       valueRenderOption: "UNFORMATTED_VALUE",
     });
 
@@ -71,7 +71,7 @@ export async function POST(req) {
           row[njScanIdColumnIndex].toString() === UID
         ) {
           const rowNumber = allValues.indexOf(row) + 2;
-          const cellRange = `playground!N${rowNumber}:Q${rowNumber}`;
+          const cellRange = `InviteeList!S${rowNumber}:V${rowNumber}`;
           const values = [
             parseInt(member.MainResponse),
             parseInt(member.ShitabiResponse),
@@ -134,7 +134,7 @@ export async function GET(req) {
 
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
-      range: "playground",
+      range: "InviteeList",
     });
 
     const rawData = response.data.values;
@@ -168,7 +168,7 @@ export async function GET(req) {
 
     const familyData = parsed[guid] || [];
 
-    console.log(familyData);
+    console.log("\n\nFamily Data\n\n",familyData);
 
     return NextResponse.json(familyData);
   } catch (err) {

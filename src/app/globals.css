@@ -21,6 +21,25 @@ a {
   all: unset;
 }
 
+.card-navigation {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.nav-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ccc;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.nav-dot.active {
+  background-color: #333;
+}
+
 .landingpage {
   margin-bottom: 150px;
 
