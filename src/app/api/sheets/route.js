@@ -71,7 +71,7 @@ export async function POST(req) {
           row[njScanIdColumnIndex].toString() === UID
         ) {
           const rowNumber = allValues.indexOf(row) + 2;
-          const cellRange = `InviteeList!S${rowNumber}:V${rowNumber}`;
+          const cellRange = `InviteeList!R${rowNumber}:U${rowNumber}`;
           const values = [
             parseInt(member.MainResponse),
             parseInt(member.ShitabiResponse),
