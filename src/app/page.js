@@ -100,6 +100,7 @@ const Home = () => {
   }, [cardOrder]);
 
   const handleCardClick = (clickedCard) => {
+    console.log(typeof cardOrder, clickedCard)
     const newOrder = [...cardOrder];
     const clickedCardIndex = newOrder.indexOf(clickedCard);
 
@@ -165,7 +166,7 @@ const Home = () => {
         />
       )}
       <div className="row p-3 mt-3 mb-4">
-        <h1>Motiwala Shaadi 1446</h1>
+        <h1>{"Jumana's Shaadi 1446"}</h1>
       </div>
       {!guid ? (
         <div className="row">
@@ -177,32 +178,28 @@ const Home = () => {
         <div className="row">
           <Tunes />
           <div className="col-12 col-md-5 p-3 order-md-1 cardsDiv">
-            <div className="image-stack">
-              {cardOrder.map((item, index) => (
-                <div
-                  key={index}
-                  className="cardD"
-                  onClick={() => handleCardClick(item)}
-                  style={{ zIndex: cardOrder.indexOf(item) + 1 }}
-                >
-                  <img
-                    src={item}
-                    alt="Card"
-                    className="cardView card-img-top"
-                  />
-                </div>
-              ))}
+            <div className="row">
+              <div className="image-stack">
+                {cardOrder.map((item, index) => (
+                  <div
+                    key={index}
+                    className="cardD"
+                    onClick={() => handleCardClick(item)}
+                    style={{ zIndex: cardOrder.indexOf(item) + 1 }}
+                  >
+                    <img
+                      src={item}
+                      alt="Card"
+                      className="cardView card-img-top"
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
             <div className="card-navigation">
-              {cardOrder.map((_, index) => (
-                <span
-                  key={index}
-                  className={`nav-dot ${index === currentCardIndex ? "active" : ""}`}
-                  onClick={() => setActiveCardIndex(index)}
-                >
-                  a
-                </span>
-              ))}
+              <button className="cardswitchbtn"onClick={() => handleCardClick(cardOrder[0])}>
+                Next Card
+              </button>
             </div>
           </div>
           <div className="col-12 col-md-1" />

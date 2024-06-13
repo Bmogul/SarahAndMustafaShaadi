@@ -31,13 +31,10 @@ const Details = ({
         ) : (
           family.map((member, index) =>
             member.MainInvite > 0 ||
-            member.MainInvite === "ALL" ||
             member.ShitabiInvite > 0 ||
-            member.ShitabiInvite === "ALL" ||
-            member.WalimoInvite > 0 ||
-            member.WalimoInvite === "ALL" ? (
+            member.WalimoInvite > 0 ? (
               <label key={index} className="fs-4 w-100">
-                {member.Name}
+                {member.Title} {member.Name}
               </label>
             ) : null,
           )

@@ -168,6 +168,8 @@ export async function GET(req) {
 
     const familyData = parsed[guid] || [];
 
+    familyData.sort((a,b)=>a["HOF Flag"] - b["HOF Flag"])
+
     console.log("\n\nFamily Data\n\n",familyData);
 
     return NextResponse.json(familyData);
