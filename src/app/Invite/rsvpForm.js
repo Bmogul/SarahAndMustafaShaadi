@@ -51,7 +51,7 @@ const RSVPForm = ({
       events.push({
         title: "Mamu Mosallo",
         date: "August 8th, 2024",
-        location: "TBD, Houston, TX",
+        location: "11941 S Texas 6, Sugar Land, TX 77498",
         members: waalimoMembers,
       });
     }
