@@ -119,18 +119,16 @@ const RSVPForm = ({
               updateMember={updateMember}
             />
             <div className="d-flex justify-content-center formUtilityBtns">
-                {currentEventIndex !== 0 && (
-
-              <div className="col-md d-flex justify-content-center">
+              {currentEventIndex !== 0 && (
+                <div className="col-md d-flex justify-content-center">
                   <button
                     className="prevBtn rsvpFormBtn rounded-4 btn-secondary fs-4 me-2"
                     onClick={handlePrevClick}
                   >
                     Prev
                   </button>
-
-              </div>
-                )}
+                </div>
+              )}
               {currentEventIndex === invitedEvents.length - 1 ? (
                 <>
                   <div className="col-md">

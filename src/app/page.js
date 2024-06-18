@@ -100,7 +100,7 @@ const Home = () => {
   }, [cardOrder]);
 
   const handleCardClick = (clickedCard) => {
-    console.log(typeof cardOrder, clickedCard)
+    console.log(typeof cardOrder, clickedCard);
     const newOrder = [...cardOrder];
     const clickedCardIndex = newOrder.indexOf(clickedCard);
 
@@ -133,24 +133,31 @@ const Home = () => {
   };
 
   const saveRsvpRes = async () => {
-    toast("Thank you for your response");
-    setShowModal(false);
-    try {
-      const response = await fetch("/api/sheets", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ family }),
-      });
+    if (
+      family[0].GUID === "eb3695269e0b43418a372e5cbba24d3d" &&
+      family[0].MainResponse != 1
+    ) {
+      toast("Who are you kidding with that plus one, try again");
+    } else {
+      toast("Thank you for your response");
+      setShowModal(false);
+      try {
+        const response = await fetch("/api/sheets", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ family }),
+        });
 
-      if (response.ok) {
-        const data = await response.json();
-      } else {
-        throw new Error("Failed to save data");
+        if (response.ok) {
+          const data = await response.json();
+        } else {
+          throw new Error("Failed to save data");
+        }
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
     }
   };
 
@@ -197,7 +204,10 @@ const Home = () => {
               </div>
             </div>
             <div className="card-navigation">
-              <button className="cardswitchbtn"onClick={() => handleCardClick(cardOrder[0])}>
+              <button
+                className="cardswitchbtn"
+                onClick={() => handleCardClick(cardOrder[0])}
+              >
                 Next Card
               </button>
             </div>
