@@ -48,7 +48,6 @@ const Details = ({
       </div>
 
       <div className="row mb-5">
-        <label className="fs-3">Please RSVP by {rsvpDate}</label>
       </div>
 
       <div className="row d-flex justify-content-center">
