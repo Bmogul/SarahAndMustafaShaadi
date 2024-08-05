@@ -34,7 +34,7 @@ const RSVPForm = ({
     if (invitedTo.mainT) {
       events.push({
         title: "Rukhsati",
-        date: "Evening, August 10th, 2024",
+        date: "6:30 PM, August 10th, 2024",
         location: "17730 Coventry Park Dr, Houston, TX 77084",
         members: mainMembers,
       });
@@ -42,7 +42,7 @@ const RSVPForm = ({
     if (invitedTo.shitaabiT) {
       events.push({
         title: "Shitaabi",
-        date: "August 7th, 2024",
+        date: "6:00 PM, August 7th, 2024",
         location: "17730 Coventry Park Dr, Houston, TX 77084",
         members: shitaabiMembers,
       });
@@ -50,7 +50,7 @@ const RSVPForm = ({
     if (invitedTo.waalimoT) {
       events.push({
         title: "Mamu Mosallo",
-        date: "August 8th, 2024",
+        date: "6:00 PM, August 8th, 2024",
         location: "11941 S Texas 6, Sugar Land, TX 77498",
         members: waalimoMembers,
       });
