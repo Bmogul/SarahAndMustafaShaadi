@@ -44,7 +44,7 @@ export async function POST(req) {
 
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
-      range: "InviteeList",
+      range: "Main",
       valueRenderOption: "UNFORMATTED_VALUE",
     });
 
@@ -71,11 +71,9 @@ export async function POST(req) {
           row[njScanIdColumnIndex].toString() === UID
         ) {
           const rowNumber = allValues.indexOf(row) + 2;
-          const cellRange = `InviteeList!R${rowNumber}:U${rowNumber}`;
+          const cellRange = `Main!M${rowNumber}:O${rowNumber}`;
           const values = [
             parseInt(member.MainResponse),
-            parseInt(member.ShitabiResponse),
-            parseInt(member.WalimoResponse),
             getCentralTimeDate()
           ];
 
@@ -134,7 +132,7 @@ export async function GET(req) {
 
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
-      range: "InviteeList",
+      range: "Main",
     });
 
     const rawData = response.data.values;

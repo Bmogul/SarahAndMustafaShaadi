@@ -33,9 +33,9 @@ const RSVPForm = ({
     const events = [];
     if (invitedTo.mainT) {
       events.push({
-        title: "Rukhsati",
-        date: "6:30 PM, August 10th, 2024",
-        location: "17730 Coventry Park Dr, Houston, TX 77084",
+        title: "Shadi Kushi Jaman",
+        date: "5:30 PM, October 26th, 2024",
+        location: "341 Dunhams Corner Rd, East Brunswick NJ",
         members: mainMembers,
       });
     }
@@ -81,28 +81,6 @@ const RSVPForm = ({
               onClick={closeForm}
               alt="close"
             />
-            {/*currentEventIndex !== 0 && (
-              <div
-                className="d-flex align-items-center arrowBtn eventPrev"
-                onClick={handlePrevClick}
-              >
-                <img src="/left_arrow.svg" className="" />
-                <span className="event-name">
-                  {invitedEvents[currentEventIndex - 1].title}
-                </span>
-              </div>
-            )}
-            {currentEventIndex !== invitedEvents.length - 1 && (
-              <div
-                className="d-flex align-items-center arrowBtn eventNext"
-                onClick={handleNextClick}
-              >
-                <span className="event-name">
-                  {invitedEvents[currentEventIndex + 1].title}
-                </span>
-                <img src="/right_arrow.svg" className="" />
-              </div>
-            )*/}
           </div>
         </div>
       )}

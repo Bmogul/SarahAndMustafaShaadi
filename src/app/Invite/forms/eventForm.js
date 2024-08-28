@@ -11,7 +11,7 @@ const EventForm = ({ title, date, location, members, updateMember }) => {
   }, [members]);
 
   // Check if the title is "Shaadi Jaman & Darees"
-  const isMainEvent = title === "Ruhksati";
+  const isMainEvent = title === "Shadi Khushi Jaman";
 
   // Find the member with a non-zero MainFlag value (only if it's the main event)
   const memberWithFlag = isMainEvent

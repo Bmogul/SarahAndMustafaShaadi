@@ -84,6 +84,7 @@ const Home = () => {
         const response = await fetch(`/api/sheets?guid=${guid}`);
         const data = await response.json();
         // Process the data as needed
+        console.log("Family data retrieved", data)
         setFamily(data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -133,12 +134,6 @@ const Home = () => {
   };
 
   const saveRsvpRes = async () => {
-    if (
-      family[0].GUID === "eb3695269e0b43418a372e5cbba24d3d" &&
-      family[0].MainResponse != 1
-    ) {
-      toast("Who are you kidding with that plus one, try again");
-    } else {
       toast("Thank you for your response");
       setShowModal(false);
       try {
@@ -158,7 +153,6 @@ const Home = () => {
       } catch (error) {
         console.error(error);
       }
-    }
   };
 
   return (
@@ -173,7 +167,7 @@ const Home = () => {
         />
       )}
       <div className="row p-3 mt-3 mb-4">
-        <h1>{"Jumana's Shaadi 1446"}</h1>
+        <h1>{"Sarah and Mustafa"}</h1>
       </div>
       {!guid ? (
         <div className="row">
@@ -204,12 +198,12 @@ const Home = () => {
               </div>
             </div>
             <div className="card-navigation">
-              <button
+             {/* <button
                 className="cardswitchbtn"
                 onClick={() => handleCardClick(cardOrder[0])}
               >
                 Next Card
-              </button>
+              </button>*/}
             </div>
           </div>
           <div className="col-12 col-md-1" />

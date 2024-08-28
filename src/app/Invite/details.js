@@ -14,7 +14,7 @@ const Details = ({
 
   useEffect(() => {
     if (!headMember) return;
-    if (headMember.MainFlag !== null && parseInt(headMember.MainFlag) > 0) {
+    if (headMember.FamilyOrder !== null && parseInt(headMember.FamilyOrder) == 1) {
       setIsHeadMemberWithMainFlag(true);
     }
   }, [headMember]);
@@ -22,22 +22,23 @@ const Details = ({
   return (
     <div className="container">
       <div className="row mb-3">
-        <h2>Join Us For A Tale As Old As Time</h2>
+        <h2>We cordially invite you</h2>
       </div>
 
       <div className="row mb-3 d-flex justify-content-center text-center ">
         {isHeadMemberWithMainFlag ? (
           <label className="fs-4 w-100">{headMember.Name}</label>
         ) : (
-          family.map((member, index) =>
-            member.MainInvite > 0 ||
-            member.ShitabiInvite > 0 ||
-            member.WalimoInvite > 0 ? (
-              <label key={index} className="fs-4 w-100">
-                {member.Title} {member.Name}
-              </label>
-            ) : null,
-          )
+
+          family
+            .sort((a, b) => a.FamilyOrder - b.FamilyOrder)
+            .map((member, index) =>
+              member.MainInvite > 0 ? (
+                <label key={index} className="fs-4 w-100">
+                  {member.Title} {member.Name}
+                </label>
+              ) : null,
+            )
         )}
       </div>
 

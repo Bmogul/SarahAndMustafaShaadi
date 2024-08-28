@@ -24,6 +24,7 @@ const Component = ({ member, event, updateMember }) => {
   };
 
   useEffect(() => {
+    console.log("Hello there", event)
     switch (event) {
       case "Shitaabi":
         setEventRes("ShitabiResponse");
@@ -31,12 +32,13 @@ const Component = ({ member, event, updateMember }) => {
       case "Mamu Mosallo":
         setEventRes("WalimoResponse");
         break;
-      case "Rukhsati":
+      case "Shadi Kushi Jaman":
         setEventRes("MainResponse");
         setMainFlag(member.MainFlag ? parseInt(member.MainFlag) : 0);
         setSelectedValue(parseInt(member.MainResponse));
         break;
       default:
+        console.log(event, member.MainFlag)
         setEventRes(null);
         break;
     }
