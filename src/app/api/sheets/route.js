@@ -16,7 +16,7 @@ import { getGoogleSheets, getAuthClient } from "../../lib/google-sheets";
   }
 }*/
 const getCentralTimeDate = () => {
-  const centralTimeZone = 'America/Chicago'; // Central Time Zone
+  const centralTimeZone = "America/Chicago"; // Central Time Zone
   const now = new Date();
   const offsetMs = now.getTimezoneOffset() * 60 * 1000;
   const centralTimeMs = now.getTime() - offsetMs;
@@ -24,8 +24,8 @@ const getCentralTimeDate = () => {
 
   // Get the year, month, and date components
   const year = centralTime.getFullYear();
-  const month = String(centralTime.getMonth() + 1).padStart(2, '0');
-  const day = String(centralTime.getDate()).padStart(2, '0');
+  const month = String(centralTime.getMonth() + 1).padStart(2, "0");
+  const day = String(centralTime.getDate()).padStart(2, "0");
 
   return `${month}/${day}/${year}`;
 };
@@ -37,7 +37,7 @@ export async function POST(req) {
     if (!family || family.length === 0)
       return NextResponse.json(
         { message: "Invalid data format" },
-        { status: 400 }
+        { status: 400 },
       );
 
     const sheets = await getGoogleSheets();
@@ -53,8 +53,8 @@ export async function POST(req) {
     const guidColumnIndex = headerRow.indexOf("GUID");
     const njScanIdColumnIndex = headerRow.indexOf("UID");
 
-    console.log(guidColumnIndex)
-    console.log(njScanIdColumnIndex)
+    console.log(guidColumnIndex);
+    console.log(njScanIdColumnIndex);
 
     const valuesToUpdate = {};
 
@@ -66,18 +66,16 @@ export async function POST(req) {
       }
 
       const matchingRows = allValues.filter((row) => {
+        console.log("Hello", row)
         if (
           row[guidColumnIndex].toString() === GUID &&
           row[njScanIdColumnIndex].toString() === UID
         ) {
           const rowNumber = allValues.indexOf(row) + 2;
           const cellRange = `Main!M${rowNumber}:O${rowNumber}`;
-          const values = [
-            parseInt(member.MainResponse),
-            getCentralTimeDate()
-          ];
+          const values = [parseInt(member.MainResponse), getCentralTimeDate()];
 
-          console.log(values)
+          console.log("Values", values);
 
           valuesToUpdate[cellRange] = {
             values: [values],
@@ -85,8 +83,6 @@ export async function POST(req) {
 
           return true;
         }
-        console.log("NOPE")
-
         return false;
       });
     }
@@ -108,7 +104,7 @@ export async function POST(req) {
         spreadsheetId: process.env.GOOGLE_SHEET_ID,
         resource: batchUpdateRequest,
       });
-      console.log(batchUpdateRequest)
+      console.log(batchUpdateRequest);
     }
 
     return NextResponse.json({ message: "Success" }, { status: 200 });
@@ -126,7 +122,7 @@ export async function GET(req) {
     if (!guid)
       return NextResponse.json({ message: "Missing guid" }, { status: 400 });
 
-    console.log(process.env.GOOGLE_SHEET_ID, '/n/n/n');
+    console.log(process.env.GOOGLE_SHEET_ID, "/n/n/n");
 
     const sheets = await getGoogleSheets();
 
@@ -150,10 +146,10 @@ export async function GET(req) {
 
       const parsedRow = row.reduce((acc, value, index) => {
         let key = keys[index];
-        if (key === 'MMInvite') {
-          key = 'WalimoInvite';
-        } else if (key === 'MMResponse') {
-          key = 'WalimoResponse';
+        if (key === "MMInvite") {
+          key = "WalimoInvite";
+        } else if (key === "MMResponse") {
+          key = "WalimoResponse";
         }
         acc[key] = value || null;
         return acc;
@@ -166,16 +162,16 @@ export async function GET(req) {
 
     const familyData = parsed[guid] || [];
 
-    familyData.sort((a,b)=>a["HOF Flag"] - b["HOF Flag"])
+    familyData.sort((a, b) => a["HOF Flag"] - b["HOF Flag"]);
 
-    console.log("\n\nFamily Data\n\n",familyData);
+    console.log("\n\nFamily Data\n\n", familyData);
 
     return NextResponse.json(familyData);
   } catch (err) {
     console.error(err);
     return NextResponse.json(
       { message: "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

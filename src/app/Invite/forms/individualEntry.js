@@ -24,7 +24,7 @@ const Component = ({ member, event, updateMember }) => {
   };
 
   useEffect(() => {
-    console.log("Hello there", event)
+    console.log("Hello there", event);
     switch (event) {
       case "Shitaabi":
         setEventRes("ShitabiResponse");
@@ -32,13 +32,13 @@ const Component = ({ member, event, updateMember }) => {
       case "Mamu Mosallo":
         setEventRes("WalimoResponse");
         break;
-      case "Shadi Kushi Jaman":
+      case "Shaadi Khushi and Rukhsati Jaman":
         setEventRes("MainResponse");
-        setMainFlag(member.MainFlag ? parseInt(member.MainFlag) : 0);
+        setMainFlag(member.InviteType ? parseInt(member.InviteType) : 0);
         setSelectedValue(parseInt(member.MainResponse));
         break;
       default:
-        console.log(event, member.MainFlag)
+        console.log(event, member.InviteType);
         setEventRes(null);
         break;
     }
@@ -60,9 +60,7 @@ const Component = ({ member, event, updateMember }) => {
         return (
           <div className="individualEntry">
             <div className="col-md-4">
-              <label className="fs-5">
-                {member.Name}
-              </label>
+              <label className="fs-5">{member.Name}</label>
             </div>
             <div className="col-md-3">
               <button

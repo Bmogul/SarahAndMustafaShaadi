@@ -84,7 +84,7 @@ const Home = () => {
         const response = await fetch(`/api/sheets?guid=${guid}`);
         const data = await response.json();
         // Process the data as needed
-        console.log("Family data retrieved", data)
+        console.log("Family data retrieved", data);
         setFamily(data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -134,25 +134,25 @@ const Home = () => {
   };
 
   const saveRsvpRes = async () => {
-      toast("Thank you for your response");
-      setShowModal(false);
-      try {
-        const response = await fetch("/api/sheets", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ family }),
-        });
+    toast("Thank you for your response");
+    setShowModal(false);
+    try {
+      const response = await fetch("/api/sheets", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ family }),
+      });
 
-        if (response.ok) {
-          const data = await response.json();
-        } else {
-          throw new Error("Failed to save data");
-        }
-      } catch (error) {
-        console.error(error);
+      if (response.ok) {
+        const data = await response.json();
+      } else {
+        throw new Error("Failed to save data");
       }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -167,7 +167,7 @@ const Home = () => {
         />
       )}
       <div className="row p-3 mt-3 mb-4">
-        <h1>{"Sarah and Mustafa"}</h1>
+        <h1>{"Sarah and Mustufa"}</h1>
       </div>
       {!guid ? (
         <div className="row">
@@ -198,7 +198,7 @@ const Home = () => {
               </div>
             </div>
             <div className="card-navigation">
-             {/* <button
+              {/* <button
                 className="cardswitchbtn"
                 onClick={() => handleCardClick(cardOrder[0])}
               >

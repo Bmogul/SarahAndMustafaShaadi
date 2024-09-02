@@ -33,7 +33,7 @@ const RSVPForm = ({
     const events = [];
     if (invitedTo.mainT) {
       events.push({
-        title: "Shadi Kushi Jaman",
+        title: "Shaadi Khushi and Rukhsati Jaman",
         date: "5:30 PM, October 26th, 2024",
         location: "341 Dunhams Corner Rd, East Brunswick NJ",
         members: mainMembers,
